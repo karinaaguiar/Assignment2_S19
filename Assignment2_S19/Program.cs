@@ -8,7 +8,7 @@ namespace Assignment2_S19
     {
         static void Main(string[] args)
         {
-            /*// left rotation
+            // left rotation
             Console.WriteLine("Left Rotation");
             int d = 4;
             int[] a = { 1, 2, 3, 4, 5 };
@@ -46,16 +46,17 @@ namespace Assignment2_S19
 
             // closest numbers
             Console.WriteLine("\n\nClosest numbers");
-            int[] arr3 = { -20, -3916237, -357920, -3620601,
-                           7374819, -7330761, 30, 6246457,
-                            -6461594, 266854, -520, -470 };
-            //{ 5, 4, 3, 2 };
+            int[] arr3 = { 5, 4, 3, 2 };
+            /*{ -20, -3916237, -357920, -3620601,
+               7374819, -7330761, 30, 6246457,
+                -6461594, 266854, -520, -470 };*/
+            //
             int[] r4 = closestNumbers(arr3);
-            displayArray(r4);*/
+            displayArray(r4);
 
             // Day of programmer
             Console.WriteLine("\n\nDay of Programmer");
-            int year = 1800;
+            int year = 2017;
             Debug.WriteLine(dayOfProgrammer(year));
         }
 
@@ -63,7 +64,6 @@ namespace Assignment2_S19
             Console.WriteLine();
             foreach(int n in arr) {
                 Console.Write(n + " ");
-                Debug.WriteLine(n + " "); //To Remove
             }
         }
 
