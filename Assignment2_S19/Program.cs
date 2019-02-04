@@ -133,7 +133,7 @@ namespace Assignment2_S19
             {
                 int arrSize = arr.Length;
                 // At least two element to find smallest absolute difference
-                if (arrSize > 2)
+                if (arrSize >= 2)
                 {
                     List<int> result = new List<int>();
                     Array.Sort(arr); //TODO
@@ -165,6 +165,7 @@ namespace Assignment2_S19
                             //Found a new pair that matches the current smallesDifference
                             else if (absDifference == smallestDifference)
                             {
+                                //Add new pair
                                 result.Add(arr[i]);
                                 result.Add(arr[i + 1]);
                             }
