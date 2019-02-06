@@ -41,11 +41,14 @@ namespace Assignment2_S19
 
             // find the median
             Console.WriteLine("\n\nFind the median");
+            Debug.WriteLine("\n\nFind the median");
             int[] arr2 = { 0, 1, 2, 4, 6, 5, 3};
             Console.WriteLine(findMedian(arr2));
+            Debug.WriteLine(findMedian(arr2));
 
             // closest numbers
             Console.WriteLine("\n\nClosest numbers");
+            Debug.WriteLine("\n\nClosest numbers");
             int[] arr3 = { 5, 4, 3, 2 };
             /*{ -20, -3916237, -357920, -3620601,
                7374819, -7330761, 30, 6246457,
@@ -55,14 +58,17 @@ namespace Assignment2_S19
 
             // Day of programmer
             Console.WriteLine("\n\nDay of Programmer");
+            Debug.WriteLine("\n\nDay of Programmer");
             int year = 2017;
             Console.WriteLine(dayOfProgrammer(year));
+            Debug.WriteLine(dayOfProgrammer(year));
         }
 
         static void displayArray(int []arr) {
             Console.WriteLine();
             foreach(int n in arr) {
                 Console.Write(n + " ");
+                Debug.Write(n + " ");
             }
         }
 
@@ -103,25 +109,30 @@ namespace Assignment2_S19
             try
             {
                 int arrSize = arr.Length;
-                // At least one element to find Median & n is odd constraint
-                if (arrSize > 0 && (arrSize % 2 != 0))
+                // At least one element to find Median
+                if (arrSize > 0)
                 {
                     Array.Sort(arr); //TODO
-                    Debug.WriteLine(arr[(arrSize - 1) / 2]);
-                    return arr[(arrSize - 1) / 2];
+                    //n is odd, then return the middle element
+                    if (arrSize % 2 != 0) 
+                    {
+                        return arr[(arrSize - 1) / 2];
+                    }
+                    //n is even, then return mean of two middle values
+                    else
+                    {
+                        int mean = (arr[(arrSize / 2 - 1)] + arr[arrSize / 2]) / 2;
+                        return mean;
+                    }
                 }
                 else if (arrSize == 0)
                 {
                     Debug.WriteLine("Bad input. The array is empty");
                 }
-                else if (arrSize % 2 == 0)
-                {
-                    Debug.WriteLine("Bad input. The array is even");
-                }
             }
             catch
             {
-                Console.WriteLine("Exception occured while computing findMedian()");
+                Debug.WriteLine("Exception occured while computing findMedian()");
             }
             return 0;
         }
@@ -180,7 +191,7 @@ namespace Assignment2_S19
             }
             catch
             {
-                Console.WriteLine("Exception occured while computing closestNumbers()");
+                Debug.WriteLine("Exception occured while computing closestNumbers()");
             }
             return new int[] { };
         }
@@ -195,22 +206,34 @@ namespace Assignment2_S19
                 {
                     if (checkJulianLeapYear(year))
                     {
-                        return "12.09." + year.ToString();
+                        //If leap Feb has 29 days
+                        int sumFirst8MonthsDays = 31 + 29 + 31 + 30 + 31 + 30 + 31 + 31;
+                        int toReach256Day = 256 - sumFirst8MonthsDays;
+                        return toReach256Day.ToString() + ".09." + year.ToString();
                     }
                     else
                     {
-                        return "13.09." + year.ToString();
+                        //If no leap Feb has 28 days
+                        int sumFirst8MonthsDays = 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31;
+                        int toReach256Day = 256 - sumFirst8MonthsDays;
+                        return toReach256Day.ToString() + ".09." + year.ToString();
                     }
                 }
                 else if (1919 <= year && year <= 2700) //Gregorian
                 {
                     if (checkGregorianLeapYear(year))
                     {
-                        return "12.09." + year.ToString();
+                        //If leap Feb has 29 days
+                        int sumFirst8MonthsDays = 31 + 29 + 31 + 30 + 31 + 30 + 31 + 31;
+                        int toReach256Day = 256 - sumFirst8MonthsDays;
+                        return toReach256Day.ToString() + ".09." + year.ToString();
                     }
                     else
                     {
-                        return "13.09." + year.ToString();
+                        //If no leap Feb has 28 days
+                        int sumFirst8MonthsDays = 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31;
+                        int toReach256Day = 256 - sumFirst8MonthsDays;
+                        return toReach256Day.ToString() + ".09." + year.ToString();
                     }
                 }
                 else if (year == 1918) //Transition Year 1918
@@ -225,18 +248,19 @@ namespace Assignment2_S19
                     // Totals = 229 days 
                     // Minus 256, (256 - 229 = 27 days) 
                     // Then, the 256th day of the Transition year 
-                    // was Sept 30th  
-                    return "27.07." + year.ToString(); 
+                    // was Sept 27th
+                    int sumFirst8MonthsDays = 31 + 14 + 31 + 30 + 31 + 30 + 31 + 31;
+                    int toReach256Day = 256 - sumFirst8MonthsDays;
+                    return toReach256Day.ToString() + ".09." + year.ToString();
                 }
                 else //Year out of range 1700 to 2700
                 {
-                    Console.WriteLine("Bad Input - Year out of range 1700-2700");
                     Debug.WriteLine("Bad Input - Year out of range 1700-2700");
                 }
             }
             catch
             {
-                Console.WriteLine("Exception occured while computing dayOfProgrammer()");
+                Debug.WriteLine("Exception occured while computing dayOfProgrammer()");
             }
             return "";
         }
