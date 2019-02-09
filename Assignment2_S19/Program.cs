@@ -96,10 +96,10 @@ namespace Assignment2_S19
         static int[] missingNumbers(int[] arr, int[] brr)
         {
             List<int> missingNumberList = new List<int>();
-
+           
             if (brr == null || brr.Length == 0)        //make sure the array has values. Otherwise, return an error message
             {
-                Console.WriteLine("Please provide a non-empty array of integers");
+                Debug.WriteLine("Please provide a non-empty array of integers");
                 return missingNumberList.ToArray();
             }
 
@@ -109,7 +109,16 @@ namespace Assignment2_S19
             {
                 Dictionary<int, int> dicA = frequencyMap(arr);   //convert the target array to dicA using the frequencyMap method
                 Dictionary<int, int> dicB = frequencyMap(brr);   //convert the orriginal array to dicB using the frequencyMap method
-                
+
+                foreach (int keyA in dicA.keys)
+                {
+                    if (!dicB.ContainsKey(keyA))
+                    {
+                        Debug.WriteLine("Please provide an valid array");
+                        return new int[] { };
+                    }
+                }
+
                 foreach (int keyB in dicB.Keys)                 //loop through the keys in the dicB and compare the frequency (occurence) for each key in dicA and dicB     
                 {
                     int occurrenceKeyBInA = 0;                  //the occurence of key B in dicA get inital value of 0      
