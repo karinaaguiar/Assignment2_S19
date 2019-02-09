@@ -95,13 +95,13 @@ namespace Assignment2_S19
             int n = 1;
             try
             {
-                while (n <= d)
+                while (n <= d)                                  //loop executes till n is less than or equal to the number of rotations
                 {
                     int i = 0;
                     b[len - 1] = a[i];
                     for (i = 0; i < len - 1; i++)
                     {
-                        b[i] = a[i + 1];
+                        b[i] = a[i + 1];                        
                     }
                     for (int j = 0; j < len; j++)
                     {
@@ -151,38 +151,46 @@ namespace Assignment2_S19
         // Complete the balancedSums function below.
         static string balancedSums(List<int> arr)
         {
-            int len = arr.Count;
-            if(len == 1)                        //if array contains only one element, then balanced sum is YES
+            try
             {
-                return "YES";
-            }
-            if (arr[1] == 0)                     //if second element of array is 0, then balanced sum is YES
-            {
-                return "YES";
-            }
-            for (int j = 1; j < len; j++)
-            {
-                int i = 0;
-                int k = j + 1;
-                int sum_before = 0;
-                int sum_after = 0;
-                while (i < j)
+                int len = arr.Count;
+                if (len == 1)                        //if array contains only one element, then balanced sum is YES
                 {
-                    sum_before += arr[i];           //compute the sum for before half of a particular element in array
-                    i++;
-                }
-                while (k < len)
-                {
-                    sum_after += arr[k];            //compute the sum for after half of a particular element in array
-                    k++;
-                }
-                if (sum_after == sum_before)        //check whether the sum in the before half is equal to sum in the after half
-                {
-
                     return "YES";
-
                 }
-                continue;
+                if (arr[1] == 0)                     //if second element of array is 0, then balanced sum is YES
+                {
+                    return "YES";
+                }
+                for (int j = 1; j < len; j++)
+                {
+                    int i = 0;
+                    int k = j + 1;
+                    int sum_before = 0;
+                    int sum_after = 0;
+                    while (i < j)
+                    {
+                        sum_before += arr[i];           //compute the sum for before half of a particular element in array
+                        i++;
+                    }
+                    while (k < len)
+                    {
+                        sum_after += arr[k];            //compute the sum for after half of a particular element in array
+                        k++;
+                    }
+                    if (sum_after == sum_before)        //check whether the sum in the before half is equal to sum in the after half
+                    {
+
+                        return "YES";
+
+                    }
+                    continue;
+                }
+
+            }
+            catch
+            {
+                Console.WriteLine("Exception occured while executing the balancedSum");
             }
             return "NO";
         }
