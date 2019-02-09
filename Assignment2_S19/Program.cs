@@ -65,6 +65,8 @@ namespace Assignment2_S19
             int year = 2017;
             Console.WriteLine(dayOfProgrammer(year));
             Debug.WriteLine(dayOfProgrammer(year));
+
+            Console.ReadKey(true);
         }
 
         static void displayArray(int []arr) {
@@ -75,22 +77,130 @@ namespace Assignment2_S19
             }
         }
 
+        //Sort function for array sorting
+        static int[] Sort(int[] a)
+        {
+            int len = a.Length;
+            int temp = 0;
+            for (int i = 0; i < len; i++)
+            {
+                for (int j = i; j < len; j++)
+                {
+                    if (a[i] > a[j])
+                    {
+                        temp = a[j];
+                        a[j] = a[i];
+                        a[i] = temp;
+                    }
+                }
+            }
+            return a;
+        }
+
         // Complete the rotLeft function below.
         static int[] rotLeft(int[] a, int d)
         {
-            return new int[] {};
+            int len = a.Length;
+            int[] b = new int[len];
+            int n = 1;
+            try
+            {
+                while (n <= d)
+                {
+                    int i = 0;
+                    b[len - 1] = a[i];
+                    for (i = 0; i < len - 1; i++)
+                    {
+                        b[i] = a[i + 1];
+                    }
+                    for (int j = 0; j < len; j++)
+                    {
+                        a[j] = b[j];
+                    }
+                    n++;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Exception occured while computing RotateLeft function");
+            }
+            return b;
         }
+
+        /*static void displayArray(int[] b)
+        {
+            Console.WriteLine(string.Join(" ", b));
+        }*/
+
 
         // Complete the maximumToys function below.
         static int maximumToys(int[] prices, int k)
         {
-            return 0;
+            int count = 0;
+            try
+            {
+                int[] array = Sort(prices);         //call the sort function to sort the array first
+                int len = array.Length;
+                int sum = 0;
+                for (int i = 0; i < len; i++)
+                {
+                    if (array[i] > k)
+                        continue;
+                    sum = sum + array[i];           //compute the sum for Max toys
+                    if (sum < k)
+                    {
+                        count = count + 1;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Exception occured while computing maximumToys");
+            }
+            return count;
         }
 
         // Complete the balancedSums function below.
         static string balancedSums(List<int> arr)
         {
-            return "";
+            int len = arr.Count;
+            if(len == 1)                        //if array contains only one element, then balanced sum is YES
+            {
+                return "YES";
+            }
+            if (arr[1] == 0)                     //if second element of array is 0, then balanced sum is YES
+            {
+                return "YES";
+            }
+            for (int j = 1; j < len; j++)
+            {
+                int i = 0;
+                int k = j + 1;
+                int sum_before = 0;
+                int sum_after = 0;
+                while (i < j)
+                {
+                    sum_before += arr[i];           //compute the sum for before half of a particular element in array
+                    i++;
+                }
+                while (k < len)
+                {
+                    sum_after += arr[k];            //compute the sum for after half of a particular element in array
+                    k++;
+                }
+                if (sum_after == sum_before)        //check whether the sum in the before half is equal to sum in the after half
+                {
+
+                    return "YES";
+
+                }
+                continue;
+            }
+            return "NO";
         }
 
         // Complete the missingNumbers function below.
