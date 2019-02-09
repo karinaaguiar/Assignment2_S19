@@ -29,8 +29,7 @@ namespace Assignment2_S19
             // Missing numbers
             Console.WriteLine("\n\nMissing numbers");
             Debug.WriteLine("\n\nMissing numbers");
-            //int[] arr1 = { 203, 204, 205, 206, 207, 208, 203, 204, 205, 206};
-            int[] arr1 = { 203, 204, 205, 206, 208, 203, 204, 205, 206 };
+            int[] arr1 = { 203, 204, 205, 206, 207, 208, 203, 204, 205, 206};
             int[] brr = {203, 204, 204, 205, 206, 207, 205, 208, 203, 206, 205, 206, 204};
             int[] r2 = missingNumbers(arr1, brr);
             displayArray(r2);
@@ -106,23 +105,22 @@ namespace Assignment2_S19
 
             //TODO: find difference between min max elements of B whether it's less than or equal 100
 
-
             try
             {
-                Dictionary<int, int> dicA = frequencyMap(arr);
-                Dictionary<int, int> dicB = frequencyMap(brr);
+                Dictionary<int, int> dicA = frequencyMap(arr);   //convert the target array to dicA using the frequencyMap method
+                Dictionary<int, int> dicB = frequencyMap(brr);   //convert the orriginal array to dicB using the frequencyMap method
                 
-                foreach (int keyB in dicB.Keys)
+                foreach (int keyB in dicB.Keys)                 //loop through the keys in the dicB and compare the frequency (occurence) for each key in dicA and dicB     
                 {
-                    int occurrenceKeyBInA = 0;
-                    if(dicA.ContainsKey(keyB))
+                    int occurrenceKeyBInA = 0;                  //the occurence of key B in dicA get inital value of 0      
+                    if(dicA.ContainsKey(keyB))                  //if the key is in dicA, its occurence is equal to its frequency in dicA. Otherwise, remains 0.
                     {
                         occurrenceKeyBInA = dicA[keyB];
                     }
 
                     int occurrenceKeyBInB = dicB[keyB];
 
-                    if(occurrenceKeyBInB > occurrenceKeyBInA)
+                    if(occurrenceKeyBInB > occurrenceKeyBInA)   //if the frequency of a keyB in dicB is greater than in dicA, it is a missing value 
                     {
                         missingNumberList.Add(keyB);
                     }
@@ -130,13 +128,13 @@ namespace Assignment2_S19
             }
             catch
             {
-                Console.WriteLine("Exception occured while computing missingNumber()");
+                Debug.WriteLine("Exception occured while computing missingNumber()");
             }
 
             return missingNumberList.ToArray();
         }
 
-
+        // Write a frequencyMap method to convert an array to a dictionary with the keys are the unique elements and the values are the occurences
         static Dictionary<int, int> frequencyMap(int[] a)
         {
             Dictionary<int, int> freqMap = new Dictionary<int, int>();
@@ -157,29 +155,36 @@ namespace Assignment2_S19
         // Complete the gradingStudents function below.
         static int[] gradingStudents(int[] grades)
         {
-            if (grades == null || grades.Length == 0)        //make sure the array has values. Otherwise, return an error message
+            if (grades.Length == 0)        //make sure the array has values. Otherwise, return an error message
             {
                 Console.WriteLine("Please provide a non-empty array of integers");
+                return new int[] { };
             }
+
             try
             {
                 int[] roundedGrades = new int[grades.Length];
-                for (int i = 0; i < grades.Length; i++)
+                for (int i = 0; i < grades.Length; i++)             //loop through the array of grades
                 {
-                    if (grades[i] > 38)
+                    if (grades[i] > 100 || grades[i] < 0)           //make sure the grades are non-negative and equal or less than 100
                     {
-                        int q = grades[i] / 5;
-                        int r = grades[i] % 5;
-                        if (r >= 3)
+                        Debug.WriteLine("Please provide valid grades");
+                        return new int[] { };
+                    }
+                    else if (grades[i] >= 38 && grades[i] <= 100)   //only consider rounding if the grades is equal or greater than 38
+                    {
+                        int q = grades[i] / 5;                      
+                        int r = grades[i] % 5;                      
+                        if (r >= 3)                                 //if the remainder is greater than 3
                         {
-                            roundedGrades[i] = 5 * (q + 1);
+                            roundedGrades[i] = 5 * (q + 1);         //round grade up to the next multiple of 5
                         }
                         else
                         {
-                            roundedGrades[i] = grades[i];
+                            roundedGrades[i] = grades[i];           //otherwise, no rounding
                         }
                     }
-                    else
+                    else if (grades[i] <=37 && grades[i] >= 0)      // no rounding if the grades is equal or less than 37
                     {
                         roundedGrades[i] = grades[i];
                     }
