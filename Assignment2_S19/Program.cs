@@ -28,7 +28,6 @@ namespace Assignment2_S19
 
             // Missing numbers
             Console.WriteLine("\n\nMissing numbers");
-            Debug.WriteLine("\n\nMissing numbers");
             //int[] arr1 = { 203, 204, 205, 206, 207, 208, 203, 204, 205, 206};
             int[] arr1 = { 203, 204, 205, 206, 208, 203, 204, 205, 206 };
             int[] brr = {203, 204, 204, 205, 206, 207, 205, 208, 203, 206, 205, 206, 204};
@@ -37,32 +36,27 @@ namespace Assignment2_S19
 
             // grading students
             Console.WriteLine("\n\nGrading students");
-            Debug.WriteLine("\n\nGrading students");
             int[] grades = { 73, 67, 38, 33 };
             int[] r3 = gradingStudents(grades);
             displayArray(r3);
 
             // find the median
             Console.WriteLine("\n\nFind the median");
-            Debug.WriteLine("\n\nFind the median");
             int[] arr2 = { 0, 1, 2, 4, 6, 5, 3};
             Console.WriteLine(findMedian(arr2));
-            Debug.WriteLine(findMedian(arr2));
 
             // closest numbers
             Console.WriteLine("\n\nClosest numbers");
-            Debug.WriteLine("\n\nClosest numbers");
             int[] arr3 = { 5, 4, 3, 2 };
             int[] r4 = closestNumbers(arr3);
             displayArray(r4);
 
             // Day of programmer
             Console.WriteLine("\n\nDay of Programmer");
-            Debug.WriteLine("\n\nDay of Programmer");
             int year = 2017;
             Console.WriteLine(dayOfProgrammer(year));
-            Debug.WriteLine(dayOfProgrammer(year));
 
+            //To display results in the console
             Console.ReadKey(true);
         }
 
@@ -70,7 +64,6 @@ namespace Assignment2_S19
             Console.WriteLine();
             foreach(int n in arr) {
                 Console.Write(n + " ");
-                Debug.Write(n + " ");
             }
         }
 
@@ -123,12 +116,6 @@ namespace Assignment2_S19
             }
             return b;
         }
-
-        /*static void displayArray(int[] b)
-        {
-            Console.WriteLine(string.Join(" ", b));
-        }*/
-
 
         // Complete the maximumToys function below.
         static int maximumToys(int[] prices, int k)
@@ -308,7 +295,7 @@ namespace Assignment2_S19
                 // At least one element to find Median
                 if (arrSize > 0)
                 {
-                    Array.Sort(arr); //TODO
+                    arr = Sort(arr);
                     //n is odd, then return the middle element
                     if (arrSize % 2 != 0) 
                     {
@@ -323,12 +310,12 @@ namespace Assignment2_S19
                 }
                 else if (arrSize == 0)
                 {
-                    Debug.WriteLine("Bad input. The array is empty");
+                    Console.WriteLine("Bad input. The array is empty");
                 }
             }
             catch
             {
-                Debug.WriteLine("Exception occured while computing findMedian()");
+                Console.WriteLine("Exception occured while computing findMedian()");
             }
             return 0;
         }
@@ -343,7 +330,7 @@ namespace Assignment2_S19
                 if (arrSize >= 2)
                 {
                     List<int> result = new List<int>();
-                    Array.Sort(arr); //TODO
+                    arr = Sort(arr); 
 
                     //Initialize smallestDifference with first two elements abs difference
                     int smallestDifference = Math.Abs(arr[1] - arr[0]); 
@@ -382,12 +369,12 @@ namespace Assignment2_S19
                 }
                 else
                 {
-                    Debug.WriteLine("Bad input. The array should have at least two elements");
+                    Console.WriteLine("Bad input. The array should have at least two elements");
                 }
             }
             catch
             {
-                Debug.WriteLine("Exception occured while computing closestNumbers()");
+                Console.WriteLine("Exception occured while computing closestNumbers()");
             }
             return new int[] { };
         }
@@ -451,12 +438,12 @@ namespace Assignment2_S19
                 }
                 else //Year out of range 1700 to 2700
                 {
-                    Debug.WriteLine("Bad Input - Year out of range 1700-2700");
+                    Console.WriteLine("Bad Input - Year out of range 1700-2700");
                 }
             }
             catch
             {
-                Debug.WriteLine("Exception occured while computing dayOfProgrammer()");
+                Console.WriteLine("Exception occured while computing dayOfProgrammer()");
             }
             return "";
         }
