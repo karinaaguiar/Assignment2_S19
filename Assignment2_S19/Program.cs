@@ -28,13 +28,16 @@ namespace Assignment2_S19
 
             // Missing numbers
             Console.WriteLine("\n\nMissing numbers");
-            int[] arr1 = { 203, 204, 205, 206, 207, 208, 203, 204, 205, 206};
+            Debug.WriteLine("\n\nMissing numbers");
+            //int[] arr1 = { 203, 204, 205, 206, 207, 208, 203, 204, 205, 206};
+            int[] arr1 = { 203, 204, 205, 206, 208, 203, 204, 205, 206 };
             int[] brr = {203, 204, 204, 205, 206, 207, 205, 208, 203, 206, 205, 206, 204};
             int[] r2 = missingNumbers(arr1, brr);
             displayArray(r2);
 
             // grading students
             Console.WriteLine("\n\nGrading students");
+            Debug.WriteLine("\n\nGrading students");
             int[] grades = { 73, 67, 38, 33 };
             int[] r3 = gradingStudents(grades);
             displayArray(r3);
@@ -93,13 +96,100 @@ namespace Assignment2_S19
         // Complete the missingNumbers function below.
         static int[] missingNumbers(int[] arr, int[] brr)
         {
-            return new int[] { };
+            List<int> missingNumberList = new List<int>();
+
+            if (brr == null || brr.Length == 0)        //make sure the array has values. Otherwise, return an error message
+            {
+                Console.WriteLine("Please provide a non-empty array of integers");
+                return missingNumberList.ToArray();
+            }
+
+            //TODO: find difference between min max elements of B whether it's less than or equal 100
+
+
+            try
+            {
+                Dictionary<int, int> dicA = frequencyMap(arr);
+                Dictionary<int, int> dicB = frequencyMap(brr);
+                
+                foreach (int keyB in dicB.Keys)
+                {
+                    int occurrenceKeyBInA = 0;
+                    if(dicA.ContainsKey(keyB))
+                    {
+                        occurrenceKeyBInA = dicA[keyB];
+                    }
+
+                    int occurrenceKeyBInB = dicB[keyB];
+
+                    if(occurrenceKeyBInB > occurrenceKeyBInA)
+                    {
+                        missingNumberList.Add(keyB);
+                    }
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Exception occured while computing missingNumber()");
+            }
+
+            return missingNumberList.ToArray();
         }
 
+
+        static Dictionary<int, int> frequencyMap(int[] a)
+        {
+            Dictionary<int, int> freqMap = new Dictionary<int, int>();
+            for (int i = 0; i < a.Length; i++)     //loop through the ptovided array of integers
+            {
+                if (freqMap.ContainsKey(a[i]))      //if the current integer is already in the dictionary, increase the frequency by 1
+                {
+                    freqMap[a[i]] = freqMap[a[i]] + 1;
+                }
+                else
+                {
+                    freqMap.Add(a[i], 1);           //otherwise, add the current integer to the dictionary and set its frequency to 1
+                }
+            }
+            return freqMap;
+        }
 
         // Complete the gradingStudents function below.
         static int[] gradingStudents(int[] grades)
         {
+            if (grades == null || grades.Length == 0)        //make sure the array has values. Otherwise, return an error message
+            {
+                Console.WriteLine("Please provide a non-empty array of integers");
+            }
+            try
+            {
+                int[] roundedGrades = new int[grades.Length];
+                for (int i = 0; i < grades.Length; i++)
+                {
+                    if (grades[i] > 38)
+                    {
+                        int q = grades[i] / 5;
+                        int r = grades[i] % 5;
+                        if (r >= 3)
+                        {
+                            roundedGrades[i] = 5 * (q + 1);
+                        }
+                        else
+                        {
+                            roundedGrades[i] = grades[i];
+                        }
+                    }
+                    else
+                    {
+                        roundedGrades[i] = grades[i];
+                    }
+                }
+                return roundedGrades;
+            }
+            catch
+            {
+                Console.WriteLine("Exception occured while computing gradingStudents()");
+            }
             return new int[] { };
         }
 
