@@ -67,7 +67,7 @@ namespace Assignment2_S19
             }
         }
 
-        //Sort function for array sorting
+        //Sort function for array sorting using Bubble sort
         static int[] Sort(int[] a)
         {
             int len = a.Length;
