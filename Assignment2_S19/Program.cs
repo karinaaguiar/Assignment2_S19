@@ -28,108 +28,203 @@ namespace Assignment2_S19
 
             // Missing numbers
             Console.WriteLine("\n\nMissing numbers");
-            Debug.WriteLine("\n\nMissing numbers");
-            int[] arr1 = { 203, 204, 205, 206, 207, 208, 203, 204, 205, 206};
+            //int[] arr1 = { 203, 204, 205, 206, 207, 208, 203, 204, 205, 206};
+            int[] arr1 = { 203, 204, 205, 206, 208, 203, 204, 205, 206 };
             int[] brr = {203, 204, 204, 205, 206, 207, 205, 208, 203, 206, 205, 206, 204};
             int[] r2 = missingNumbers(arr1, brr);
             displayArray(r2);
 
             // grading students
             Console.WriteLine("\n\nGrading students");
-            Debug.WriteLine("\n\nGrading students");
             int[] grades = { 73, 67, 38, 33 };
             int[] r3 = gradingStudents(grades);
             displayArray(r3);
 
             // find the median
             Console.WriteLine("\n\nFind the median");
-            Debug.WriteLine("\n\nFind the median");
             int[] arr2 = { 0, 1, 2, 4, 6, 5, 3};
             Console.WriteLine(findMedian(arr2));
-            Debug.WriteLine(findMedian(arr2));
 
             // closest numbers
             Console.WriteLine("\n\nClosest numbers");
-            Debug.WriteLine("\n\nClosest numbers");
             int[] arr3 = { 5, 4, 3, 2 };
-            /*{ -20, -3916237, -357920, -3620601,
-               7374819, -7330761, 30, 6246457,
-                -6461594, 266854, -520, -470 };*/
             int[] r4 = closestNumbers(arr3);
             displayArray(r4);
 
             // Day of programmer
             Console.WriteLine("\n\nDay of Programmer");
-            Debug.WriteLine("\n\nDay of Programmer");
             int year = 2017;
             Console.WriteLine(dayOfProgrammer(year));
-            Debug.WriteLine(dayOfProgrammer(year));
+
+            //To display results in the console
+            Console.ReadKey(true);
         }
 
         static void displayArray(int []arr) {
             Console.WriteLine();
             foreach(int n in arr) {
                 Console.Write(n + " ");
-                Debug.Write(n + " ");
             }
+        }
+
+        //Sort function for array sorting
+        static int[] Sort(int[] a)
+        {
+            int len = a.Length;
+            int temp = 0;
+            for (int i = 0; i < len; i++)
+            {
+                for (int j = i; j < len; j++)
+                {
+                    if (a[i] > a[j])
+                    {
+                        temp = a[j];
+                        a[j] = a[i];
+                        a[i] = temp;
+                    }
+                }
+            }
+            return a;
         }
 
         // Complete the rotLeft function below.
         static int[] rotLeft(int[] a, int d)
         {
-            return new int[] {};
+            int len = a.Length;
+            int[] b = new int[len];
+            int n = 1;
+            try
+            {
+                while (n <= d)                                  //loop executes till n is less than or equal to the number of rotations
+                {
+                    int i = 0;
+                    b[len - 1] = a[i];
+                    for (i = 0; i < len - 1; i++)
+                    {
+                        b[i] = a[i + 1];                        
+                    }
+                    for (int j = 0; j < len; j++)
+                    {
+                        a[j] = b[j];
+                    }
+                    n++;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Exception occured while computing RotateLeft function");
+            }
+            return b;
         }
 
         // Complete the maximumToys function below.
         static int maximumToys(int[] prices, int k)
         {
-            return 0;
+            int count = 0;
+            try
+            {
+                int[] array = Sort(prices);         //call the sort function to sort the array first
+                int len = array.Length;
+                int sum = 0;
+                for (int i = 0; i < len; i++)
+                {
+                    if (array[i] > k)
+                        continue;
+                    sum = sum + array[i];           //compute the sum for Max toys
+                    if (sum < k)
+                    {
+                        count = count + 1;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Exception occured while computing maximumToys");
+            }
+            return count;
         }
 
         // Complete the balancedSums function below.
         static string balancedSums(List<int> arr)
         {
-            return "";
+            try
+            {
+                int len = arr.Count;
+                if (len == 1)                        //if array contains only one element, then balanced sum is YES
+                {
+                    return "YES";
+                }
+                if (arr[1] == 0)                     //if second element of array is 0, then balanced sum is YES
+                {
+                    return "YES";
+                }
+                for (int j = 1; j < len; j++)
+                {
+                    int i = 0;
+                    int k = j + 1;
+                    int sum_before = 0;
+                    int sum_after = 0;
+                    while (i < j)
+                    {
+                        sum_before += arr[i];           //compute the sum for before half of a particular element in array
+                        i++;
+                    }
+                    while (k < len)
+                    {
+                        sum_after += arr[k];            //compute the sum for after half of a particular element in array
+                        k++;
+                    }
+                    if (sum_after == sum_before)        //check whether the sum in the before half is equal to sum in the after half
+                    {
+
+                        return "YES";
+
+                    }
+                    continue;
+                }
+
+            }
+            catch
+            {
+                Console.WriteLine("Exception occured while executing the balancedSum");
+            }
+            return "NO";
         }
 
         // Complete the missingNumbers function below.
         static int[] missingNumbers(int[] arr, int[] brr)
         {
             List<int> missingNumberList = new List<int>();
-           
+
             if (brr == null || brr.Length == 0)        //make sure the array has values. Otherwise, return an error message
             {
-                Debug.WriteLine("Please provide a non-empty array of integers");
+                Console.WriteLine("Please provide a non-empty array of integers");
                 return missingNumberList.ToArray();
             }
 
             //TODO: find difference between min max elements of B whether it's less than or equal 100
 
+
             try
             {
-                Dictionary<int, int> dicA = frequencyMap(arr);   //convert the target array to dicA using the frequencyMap method
-                Dictionary<int, int> dicB = frequencyMap(brr);   //convert the orriginal array to dicB using the frequencyMap method
-
-                foreach (int keyA in dicA.keys)
+                Dictionary<int, int> dicA = frequencyMap(arr);
+                Dictionary<int, int> dicB = frequencyMap(brr);
+                
+                foreach (int keyB in dicB.Keys)
                 {
-                    if (!dicB.ContainsKey(keyA))
-                    {
-                        Debug.WriteLine("Please provide an valid array");
-                        return new int[] { };
-                    }
-                }
-
-                foreach (int keyB in dicB.Keys)                 //loop through the keys in the dicB and compare the frequency (occurence) for each key in dicA and dicB     
-                {
-                    int occurrenceKeyBInA = 0;                  //the occurence of key B in dicA get inital value of 0      
-                    if(dicA.ContainsKey(keyB))                  //if the key is in dicA, its occurence is equal to its frequency in dicA. Otherwise, remains 0.
+                    int occurrenceKeyBInA = 0;
+                    if(dicA.ContainsKey(keyB))
                     {
                         occurrenceKeyBInA = dicA[keyB];
                     }
 
                     int occurrenceKeyBInB = dicB[keyB];
 
-                    if(occurrenceKeyBInB > occurrenceKeyBInA)   //if the frequency of a keyB in dicB is greater than in dicA, it is a missing value 
+                    if(occurrenceKeyBInB > occurrenceKeyBInA)
                     {
                         missingNumberList.Add(keyB);
                     }
@@ -137,13 +232,12 @@ namespace Assignment2_S19
             }
             catch
             {
-                Debug.WriteLine("Exception occured while computing missingNumber()");
+                Console.WriteLine("Exception occured while computing missingNumber()");
             }
 
             return missingNumberList.ToArray();
         }
 
-        // Write a frequencyMap method to convert an array to a dictionary with the keys are the unique elements and the values are the occurences
         static Dictionary<int, int> frequencyMap(int[] a)
         {
             Dictionary<int, int> freqMap = new Dictionary<int, int>();
@@ -164,36 +258,29 @@ namespace Assignment2_S19
         // Complete the gradingStudents function below.
         static int[] gradingStudents(int[] grades)
         {
-            if (grades.Length == 0)        //make sure the array has values. Otherwise, return an error message
+            if (grades == null || grades.Length == 0)        //make sure the array has values. Otherwise, return an error message
             {
                 Console.WriteLine("Please provide a non-empty array of integers");
-                return new int[] { };
             }
-
             try
             {
                 int[] roundedGrades = new int[grades.Length];
-                for (int i = 0; i < grades.Length; i++)             //loop through the array of grades
+                for (int i = 0; i < grades.Length; i++)
                 {
-                    if (grades[i] > 100 || grades[i] < 0)           //make sure the grades are non-negative and equal or less than 100
+                    if (grades[i] > 38)
                     {
-                        Debug.WriteLine("Please provide valid grades");
-                        return new int[] { };
-                    }
-                    else if (grades[i] >= 38 && grades[i] <= 100)   //only consider rounding if the grades is equal or greater than 38
-                    {
-                        int q = grades[i] / 5;                      
-                        int r = grades[i] % 5;                      
-                        if (r >= 3)                                 //if the remainder is greater than 3
+                        int q = grades[i] / 5;
+                        int r = grades[i] % 5;
+                        if (r >= 3)
                         {
-                            roundedGrades[i] = 5 * (q + 1);         //round grade up to the next multiple of 5
+                            roundedGrades[i] = 5 * (q + 1);
                         }
                         else
                         {
-                            roundedGrades[i] = grades[i];           //otherwise, no rounding
+                            roundedGrades[i] = grades[i];
                         }
                     }
-                    else if (grades[i] <=37 && grades[i] >= 0)      // no rounding if the grades is equal or less than 37
+                    else
                     {
                         roundedGrades[i] = grades[i];
                     }
@@ -216,7 +303,7 @@ namespace Assignment2_S19
                 // At least one element to find Median
                 if (arrSize > 0)
                 {
-                    Array.Sort(arr); //TODO
+                    arr = Sort(arr);
                     //n is odd, then return the middle element
                     if (arrSize % 2 != 0) 
                     {
@@ -231,12 +318,12 @@ namespace Assignment2_S19
                 }
                 else if (arrSize == 0)
                 {
-                    Debug.WriteLine("Bad input. The array is empty");
+                    Console.WriteLine("Bad input. The array is empty");
                 }
             }
             catch
             {
-                Debug.WriteLine("Exception occured while computing findMedian()");
+                Console.WriteLine("Exception occured while computing findMedian()");
             }
             return 0;
         }
@@ -251,7 +338,7 @@ namespace Assignment2_S19
                 if (arrSize >= 2)
                 {
                     List<int> result = new List<int>();
-                    Array.Sort(arr); //TODO
+                    arr = Sort(arr); 
 
                     //Initialize smallestDifference with first two elements abs difference
                     int smallestDifference = Math.Abs(arr[1] - arr[0]); 
@@ -290,12 +377,12 @@ namespace Assignment2_S19
                 }
                 else
                 {
-                    Debug.WriteLine("Bad input. The array should have at least two elements");
+                    Console.WriteLine("Bad input. The array should have at least two elements");
                 }
             }
             catch
             {
-                Debug.WriteLine("Exception occured while computing closestNumbers()");
+                Console.WriteLine("Exception occured while computing closestNumbers()");
             }
             return new int[] { };
         }
@@ -344,27 +431,27 @@ namespace Assignment2_S19
                 {
                     //1918 is not a leap year neither under Julian or 
                     //Gregorian rules, this means that in 1918 February had 28 days.
-                    //Considering Feb 14th was the 32nd day of the 1918, 
-                    //February only had 14 days left that year (28-14).
+                    //Considering Feb 14th was the 1st February day on 1918, 
+                    //Then, February only had 15 days that year (28-14+1).
                     //Therefore, the 256th day of that year was: 
-                    // 31 (Jan) + 14 (Feb) + 31 (Mar) + 30 (Apr)
+                    // 31 (Jan) + 15 (Feb) + 31 (Mar) + 30 (Apr)
                     // 31 (May) + 30 (Jun) + 31 (Jul) + 31 (Ago) 
                     // Totals = 229 days 
                     // Minus 256, (256 - 229 = 27 days) 
                     // Then, the 256th day of the Transition year 
                     // was Sept 27th
-                    int sumFirst8MonthsDays = 31 + 14 + 31 + 30 + 31 + 30 + 31 + 31;
+                    int sumFirst8MonthsDays = 31 + 15 + 31 + 30 + 31 + 30 + 31 + 31;
                     int toReach256Day = 256 - sumFirst8MonthsDays;
                     return toReach256Day.ToString() + ".09." + year.ToString();
                 }
                 else //Year out of range 1700 to 2700
                 {
-                    Debug.WriteLine("Bad Input - Year out of range 1700-2700");
+                    Console.WriteLine("Bad Input - Year out of range 1700-2700");
                 }
             }
             catch
             {
-                Debug.WriteLine("Exception occured while computing dayOfProgrammer()");
+                Console.WriteLine("Exception occured while computing dayOfProgrammer()");
             }
             return "";
         }
