@@ -53,9 +53,6 @@ namespace Assignment2_S19
             Console.WriteLine("\n\nClosest numbers");
             Debug.WriteLine("\n\nClosest numbers");
             int[] arr3 = { 5, 4, 3, 2 };
-            /*{ -20, -3916237, -357920, -3620601,
-               7374819, -7330761, 30, 6246457,
-                -6461594, 266854, -520, -470 };*/
             int[] r4 = closestNumbers(arr3);
             displayArray(r4);
 
@@ -135,7 +132,6 @@ namespace Assignment2_S19
 
             return missingNumberList.ToArray();
         }
-
 
         static Dictionary<int, int> frequencyMap(int[] a)
         {
@@ -330,16 +326,16 @@ namespace Assignment2_S19
                 {
                     //1918 is not a leap year neither under Julian or 
                     //Gregorian rules, this means that in 1918 February had 28 days.
-                    //Considering Feb 14th was the 32nd day of the 1918, 
-                    //February only had 14 days left that year (28-14).
+                    //Considering Feb 14th was the 1st February day on 1918, 
+                    //Then, February only had 15 days that year (28-14+1).
                     //Therefore, the 256th day of that year was: 
-                    // 31 (Jan) + 14 (Feb) + 31 (Mar) + 30 (Apr)
+                    // 31 (Jan) + 15 (Feb) + 31 (Mar) + 30 (Apr)
                     // 31 (May) + 30 (Jun) + 31 (Jul) + 31 (Ago) 
                     // Totals = 229 days 
                     // Minus 256, (256 - 229 = 27 days) 
                     // Then, the 256th day of the Transition year 
                     // was Sept 27th
-                    int sumFirst8MonthsDays = 31 + 14 + 31 + 30 + 31 + 30 + 31 + 31;
+                    int sumFirst8MonthsDays = 31 + 15 + 31 + 30 + 31 + 30 + 31 + 31;
                     int toReach256Day = 256 - sumFirst8MonthsDays;
                     return toReach256Day.ToString() + ".09." + year.ToString();
                 }
