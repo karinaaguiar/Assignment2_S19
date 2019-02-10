@@ -1,0 +1,30 @@
+Left Rotation
+
+5 1 2 3 4
+
+Maximum toys
+4
+
+
+Balanced sums
+NO
+
+
+Missing numbers
+
+204 205 206
+
+Grading students
+
+75 67 40 33
+
+Find the median
+3
+
+
+Closest numbers
+
+2 3 3 4 4 5
+
+Day of Programmer
+13.09.2017

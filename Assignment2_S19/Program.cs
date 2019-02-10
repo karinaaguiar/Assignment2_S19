@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Assignment2_S19
 {
@@ -66,7 +65,7 @@ namespace Assignment2_S19
             }
         }
 
-        //Sort function for array sorting using Bubble sort
+        //Sort function for array using Bubble sort
         static int[] Sort(int[] a)
         {
             int len = a.Length;
@@ -94,7 +93,7 @@ namespace Assignment2_S19
             int n = 1;
             try
             {
-                while (n <= d)                                  //loop executes till n is less than or equal to the number of rotations
+                while (n <= d)                                  //loop executes until n is less than or equal to the number of rotations
                 {
                     int i = 0;
                     b[len - 1] = a[i];
@@ -111,7 +110,7 @@ namespace Assignment2_S19
             }
             catch
             {
-                Console.WriteLine("Exception occured while computing RotateLeft function");
+                Console.WriteLine("Exception occured while computing rotLeft function");
             }
             return b;
         }
@@ -142,7 +141,7 @@ namespace Assignment2_S19
             }
             catch
             {
-                Console.WriteLine("Exception occured while computing maximumToys");
+                Console.WriteLine("Exception occured while computing maximumToys function");
             }
             return count;
         }
@@ -189,7 +188,7 @@ namespace Assignment2_S19
             }
             catch
             {
-                Console.WriteLine("Exception occured while executing the balancedSum");
+                Console.WriteLine("Exception occured while computing balancedSums function");
             }
             return "NO";
         }
@@ -199,7 +198,7 @@ namespace Assignment2_S19
         {
             List<int> missingNumberList = new List<int>();
             Dictionary<int, int> dicA = frequencyMap(arr);   //convert the target array to dicA using the frequencyMap method
-            Dictionary<int, int> dicB = frequencyMap(brr);   //convert the orriginal array to dicB using the frequencyMap method
+            Dictionary<int, int> dicB = frequencyMap(brr);   //convert the original array to dicB using the frequencyMap method
 
             if (brr == null || brr.Length == 0)        //make sure the orginal array has values
             {
@@ -257,6 +256,7 @@ namespace Assignment2_S19
             int[] result = Sort(missingNumberList.ToArray());
             return result;
         }
+
         //create frequencyMap method to convert array to dictionary. The keys are the unique elements of the array and the values are the frequency of each unique element
         static Dictionary<int, int> frequencyMap(int[] a)
         {
